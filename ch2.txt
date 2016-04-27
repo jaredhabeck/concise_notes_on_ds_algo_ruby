@@ -1,0 +1,70 @@
+Review
+1. What is the difference between a simple and a structured type?
+simple is atomic, structured is not
+simple = integer, symbol, floating point, etc
+structured = array, range, record, class
+
+2. What is a pure object-oriented language?
+A language where everything is an object - all types in ruby are classes, values are instances of a class
+
+3. Name two ways that Symbol instances differ from String instances in Ruby.
+1) Symbols are immutable
+2) Symbol is singular, only one instance can exist - unique
+
+4. Is String a simple or structured type in Ruby? Explain.
+Simple - strings are not composed of other values, s[0] returns an new instance of string, not a character
+
+5. List the carrier set of Range of {1, 2, 3}. In this type, what values are 1..1, 2..1, and 1...3?
+What is max(1...3)?
+a) {1,2,3} = {{},{1},{2},{3},{1,2},{2,3},{1,2,3}}
+b) {1..1} = {1}
+c) {2..1} = {}
+d) {1...3} = {1,2}
+d) {1...3} max = 2
+
+Exercises
+1. Choose a language that you know well and list its simple and structures types.
+PHP
+simple: string, integer, float, character
+structure: array, objects
+resource???
+
+2. Choose a language that you know well and compare its simple and structured types to
+those of Ruby. Does one language have a type that is simple while the corresponding
+type in the other language is structured? Which language has more simple types or more
+structured types?
+a) PHP is very similar to Ruby in its types, though it doesn't have symbols which can be handy to use a lighter-weight though less functional strings. PHP does not have hashes, but does use arrays in this way.
+b) no, but as stated languages like C implement strings as arrays which are structured types.
+c) Ruby has more of each type, structured and simple
+
+3. Every Ruby type is a class, and every Ruby value is an instance of a class. What
+advantage and disadvantages do you see with this approach?
+
+4. Write pseudocode to implement the cover?() operation for the Range class in Ruby
+for value v E range, start s E range, end e E range
+Rules of inclusive - s <= v <= e
+Rules of exclusive - s <= v < e
+
+def cover?(value, range)
+  lower = range.first
+  upper = range.last
+  # determine if range is exclusive or inclusive
+  if range.to_s.include? "..."
+    return lower <= value && value < upper
+  end
+  if range.to_s.include? ".."
+    return lower <= value && value <= upper
+  end
+end
+
+5. Give an example of a Ruby String range r and String instance v such that
+r.cover?(v) and r.include?(v) differ
+alphabet.include? "abc"
+=> false
+alphabet.cover? "abc"
+=> true
+
+include checks if it is an element of the set, don't understand why cover would be true because "abc" is not between "a" and "z"
+
+
+
